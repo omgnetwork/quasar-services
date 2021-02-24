@@ -24,7 +24,7 @@ class Challenger {
 
           // Check if any of the ifes are quasar ifes
           const { inputs } = transaction.decodeTxBytes(ife.details.txbytes);
-          for (let j = 0; j < ifes.length; ++j) {
+          for (let j = 0; j < inputs.length; ++j) {
             const utxoPos = transaction.encodeUtxoPos(inputs[j]);
             const isQIFE = await quasar.isQuasarIfe(utxoPos);
             if (isQIFE) {

@@ -30,6 +30,7 @@ const config = {
   topup_multipler: process.env.TOPUP_MULTIPLIER,
   faucet_salt: process.env.FAUCET_SALT,
   quasar_contract_address: process.env.QUASAR_CONTRACT_ADDRESS,
+  quasar_owner_private_key: process.env.QUASAR_OWNER_PRIVATE_KEY,
 };
 
 module.exports = config;

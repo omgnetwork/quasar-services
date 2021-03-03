@@ -25,9 +25,9 @@ class PiggyBacker {
             const utxoPos = transaction.encodeUtxoPos(inputs[j]);
             const isQIFE = await quasar.isQuasarIfe(utxoPos);
             if (isQIFE) {
-              if (ife.details.available_outputs.length !== 0) {
+              for (let k = 0; k < ife.details.available_outputs.length; ++k) {
                 // check if the first output is not piggybacked
-                if (ife.details.available_outputs[0].index === 0) {
+                if (ife.details.available_outputs[k].index === 0) {
                   console.log(`Piggybacking Quasar IFE ${utxoPos.toString()}`);
 
                   await rootChain.piggybackInFlightExitOnOutput({

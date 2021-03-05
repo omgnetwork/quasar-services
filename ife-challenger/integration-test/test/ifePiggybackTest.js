@@ -49,7 +49,7 @@ describe('Quasar IFE Piggyback test', () => {
   const quasarSupplierAccount = rcHelper.createAccount(web3);
   const quasar = new Quasar(web3, config.quasar_contract_address);
   const quasarOwner = fromPrivate(config.quasar_owner_private_key);
-  const piggybacker = new PiggyBacker(childChain, rootChain, quasar, quasarOwner, POLL_INTERVAL);
+  const piggybacker = new PiggyBacker(web3, childChain, rootChain, quasar, quasarOwner, config.exit_period, POLL_INTERVAL);
   const quasarHelper = new QuasarHelper(web3, config.quasar_contract_address);
 
   before(async () => {

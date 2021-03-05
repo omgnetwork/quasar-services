@@ -33,6 +33,6 @@ const challenger = new Challenger(childChain, quasar, challengerAccount, POLL_IN
 challenger.start();
 
 const quasarOwner = fromPrivate(process.env.QUASAR_OWNER_PRIVATE_KEY);
-const piggybacker = new PiggyBacker(childChain, rootChain, quasar, quasarOwner, POLL_INTERVAL);
+const piggybacker = new PiggyBacker(web3, childChain, rootChain, quasar, quasarOwner, process.env.EXIT_PERIOD, POLL_INTERVAL);
 
 piggybacker.start();

@@ -3,7 +3,7 @@ const { transaction } = require('@omisego/omg-js-util');
 const ByzantineEvents = require('./byzantine-events');
 
 class PiggyBacker {
-  constructor(childChain, rootChain, quasar, quasarOwner, pollInterval) {
+  constructor(web3, childChain, rootChain, quasar, quasarOwner, exitPeriod, pollInterval) {
     this.byzantineEvents = new ByzantineEvents(childChain, pollInterval);
 
     this.byzantineEvents.poll.on('error', (err) => {
@@ -28,16 +28,29 @@ class PiggyBacker {
               for (let k = 0; k < ife.details.available_outputs.length; ++k) {
                 // check if the first output is not piggybacked
                 if (ife.details.available_outputs[k].index === 0) {
-                  console.log(`Piggybacking Quasar IFE ${utxoPos.toString()}`);
+                  // check if IFE is in first phase
+                  const exitId = await rootChain.getInFlightExitId(
+                    { txBytes: ife.details.txbytes },
+                  );
+                  const exitData = await rootChain.getInFlightExitData({ exitIds: [exitId] });
+                  const blockNumber = await web3.eth.getBlockNumber();
+                  const { timestamp } = await web3.eth.getBlock(blockNumber);
+                  const periodTime = exitPeriod / 2;
 
-                  await rootChain.piggybackInFlightExitOnOutput({
-                    inFlightTx: ife.details.txbytes,
-                    outputIndex: 0,
-                    txOptions: {
-                      privateKey: quasarOwner.privateKey,
-                      from: quasarOwner.address,
-                    },
-                  });
+                  if ((timestamp - exitData[0].exitStartTimestamp) / periodTime < 1) {
+                    console.log(`Piggybacking Quasar IFE ${utxoPos.toString()}`);
+
+                    await rootChain.piggybackInFlightExitOnOutput({
+                      inFlightTx: ife.details.txbytes,
+                      outputIndex: 0,
+                      txOptions: {
+                        privateKey: quasarOwner.privateKey,
+                        from: quasarOwner.address,
+                      },
+                    });
+                  } else {
+                    console.log(`Skipped Piggyback IFE ${utxoPos.toString()}`);
+                  }
                 }
               }
             }

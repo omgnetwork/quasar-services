@@ -31,6 +31,7 @@ const config = {
   faucet_salt: process.env.FAUCET_SALT,
   quasar_contract_address: process.env.QUASAR_CONTRACT_ADDRESS,
   quasar_owner_private_key: process.env.QUASAR_OWNER_PRIVATE_KEY,
+  exit_period: process.env.EXIT_PERIOD,
 };
 
 module.exports = config;

@@ -26,7 +26,7 @@ class PiggyBacker {
             const isQIFE = await quasar.isQuasarIfe(utxoPos);
             if (isQIFE) {
               for (let k = 0; k < ife.details.available_outputs.length; ++k) {
-                // the quasar only accepts the claim Tx when the first output is of the quasarowner's
+                // the quasar only accepts the claim Tx when the first output is of the quasarOwner's
                 // check if the first output is not piggybacked
                 if (ife.details.available_outputs[k].index === 0) {
                   // check if IFE is in first phase

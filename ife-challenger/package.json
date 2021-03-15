@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node src/app.js",
     "linter": "node_modules/eslint/bin/eslint.js . --fix",
-    "test": "mocha --timeout 0 test"
+    "test": "mocha --timeout 0 test",
+    "integration-test": "mocha --timeout 0 integration-test/**/*.js"
   },
   "author": "",
   "license": "Apache-2.0",

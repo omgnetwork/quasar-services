@@ -197,6 +197,16 @@ describe('Quasar IFE challenge test', () => {
         (e) => e.event === 'non_canonical_ife' && e.details.txbytes === exitData.in_flight_tx,
       );
 
+      // The Quasar Owner piggybacks the output
+      await rootChain.piggybackInFlightExitOnOutput({
+        inFlightTx: ife.details.txbytes,
+        outputIndex: 0,
+        txOptions: {
+          privateKey: config.quasar_owner_private_key,
+          from: quasarOwnerAddress,
+        },
+      });
+
       // The challenger should have challenged the Quasar IFE.
       // Might take a while, so retry if necessary.
       assert.isTrue(await promiseRetry(async (retry) => {
@@ -384,6 +394,16 @@ describe('Quasar IFE challenge test', () => {
         'byzantine_events',
         (e) => e.event === 'non_canonical_ife' && e.details.txbytes === exitData.in_flight_tx,
       );
+
+      // The Quasar Owner piggybacks the output
+      await rootChain.piggybackInFlightExitOnOutput({
+        inFlightTx: ife.details.txbytes,
+        outputIndex: 0,
+        txOptions: {
+          privateKey: config.quasar_owner_private_key,
+          from: quasarOwnerAddress,
+        },
+      });
 
       // The challenger should have challenged the Quasar IFE.
       // Might take a while, so retry if necessary.

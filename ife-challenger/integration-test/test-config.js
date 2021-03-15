@@ -18,9 +18,7 @@ require('dotenv').config();
 const config = {
   eth_node: process.env.ETH_NODE,
   watcher_url: process.env.WATCHER_URL,
-  watcher_security_url: process.env.WATCHER_SECURITY_URL,
   watcher_proxy_url: process.env.WATCHER_PROXY_URL,
-  childchain_url: process.env.CHILDCHAIN_URL,
   plasmaframework_contract_address: process.env.PLASMA_CONTRACT_ADDRESS,
   erc20_contract_address: process.env.ERC20_CONTRACT_ADDRESS,
   fund_account: process.env.FUND_ACCOUNT,
@@ -30,6 +28,8 @@ const config = {
   topup_multipler: process.env.TOPUP_MULTIPLIER,
   faucet_salt: process.env.FAUCET_SALT,
   quasar_contract_address: process.env.QUASAR_CONTRACT_ADDRESS,
+  quasar_owner_private_key: process.env.QUASAR_OWNER_PRIVATE_KEY,
+  exit_period: process.env.EXIT_PERIOD,
 };
 
 module.exports = config;

@@ -51,21 +51,21 @@ async function merge(utxos, childChain, account) {
 //   console.log(utxos);
 //   console.log(utxos.length);
 
-// console.log(utxos);
+  // console.log(utxos);
 
   if (utxos.flat().length === 1) {
     return utxos;
   }
 
-  let utxoInGroups = utxos;
-  let res = [];
+  const utxoInGroups = utxos;
+  const res = [];
   while (utxoInGroups.length !== 0) {
     res.push(utxoInGroups.splice(0, 4));
   }
 
-  let txs = res.map((utxo) => createMergeTx(utxo));
-//   console.log(res);
-//   console.log(txs);
+  const txs = res.map((utxo) => createMergeTx(utxo));
+  //   console.log(res);
+  //   console.log(txs);
 
   const results = await Promise.all(txs.map((tx) => submit(childChain, tx, account.privateKey)));
   const nextUtxos = results.flat();

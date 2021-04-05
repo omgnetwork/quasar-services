@@ -215,18 +215,15 @@ describe('Quasar Repayment test', () => {
         .sub(web3.utils.toBN(ethFee))
         .add(web3.utils.toBN(this.quasarBond))
         .sub(web3.utils.toBN(this.aliceSpentOnGas));
-      console.log(expected.toString());
-      console.log(aliceEthBalanceAfterClaim);
       assert.equal(aliceEthBalanceAfterClaim.toString(), expected.toString());
 
       const quasarCapacityBefore = await quasarHelper.quasarOwedCapacity(transaction.ETH_CURRENCY);
-      console.log(quasarCapacityBefore);
-    
-      await rcHelper.sleep(580000);
+      console.log('Waiting to Repay...');
+      await rcHelper.sleep(config.exit_period);
 
       const quasarCapacityAfter = await quasarHelper.quasarOwedCapacity(transaction.ETH_CURRENCY);
-      console.log(quasarCapacityAfter);
-      assert.equal(quasarCapacityAfter.owedAmount, 0);
+      const expectedQuasarCapacity = quasarCapacityBefore.owedAmount - INTIIAL_ALICE_AMOUNT;
+      assert.equal(quasarCapacityAfter.owedAmount, expectedQuasarCapacity);
     });
   });
 });

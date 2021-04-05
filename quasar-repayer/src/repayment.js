@@ -3,6 +3,7 @@ const numberToBN = require('number-to-bn');
 async function repay(rootChain, web3, quasar, account, token) {
   // fetch exit queue for token
   const exitQueue = await rootChain.getExitQueue(token);
+  console.log(exitQueue);
   const blocknum = await web3.eth.getBlockNumber();
   const timestampNow = (await web3.eth.getBlock(blocknum)).timestamp;
   // fethc exits that are exitable from the queue
@@ -29,6 +30,7 @@ async function repay(rootChain, web3, quasar, account, token) {
     // find index position of the last utxo of the quasar owner in the queue
     const index = exitsInQueue.findIndex((exit) => exit.utxoPos === finalUtxoPos);
 
+    console.log('Processing Exit...');
     await rootChain.processExits({
       token,
       exitId: 0,
@@ -39,6 +41,7 @@ async function repay(rootChain, web3, quasar, account, token) {
       },
     });
 
+    console.log(`Repaying Quasar with ${totalAmount.toString()} wei`);
     await quasar.repayOwedToken({
       amount: totalAmount.toString(),
       currency: token,
@@ -48,7 +51,7 @@ async function repay(rootChain, web3, quasar, account, token) {
       },
     });
   } else {
-    console.log('No Exit in queue');
+    console.log('No exitable Exit in queue, skipped');
   }
 }
 

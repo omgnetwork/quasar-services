@@ -17,6 +17,7 @@ MIN_AMOUNT_ETH_PER_TEST=    <<minimum amount of eth per test>>
 FUND_ACCOUNT=               <account with funds for tests>
 FUND_ACCOUNT_PRIVATEKEY=    <private key of fund account>
 ERC20_CONTRACT_ADDRESS=     <erc20 token contract for faucet>
+EXIT_PERIOD=                <exit period in ms + buffer>
 ```
 
 Start the repayment service -

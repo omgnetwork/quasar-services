@@ -7,7 +7,7 @@ async function startExit(childChain, rootChain, account, token, pollInterval) {
   const utxosFiltered = allUtxos
     .filter((utxo) => utxo.currency.toLowerCase() === token.toLowerCase());
   if (utxosFiltered.length === 0) {
-    console.log('No Utxos, skipped.');
+    console.log('No Utxos on the childchain, skipped.');
   } else {
     // recursive merge the filtered Utxos
     const finalUtxo = await merge(utxosFiltered, childChain, account);
@@ -15,6 +15,7 @@ async function startExit(childChain, rootChain, account, token, pollInterval) {
     const exitData = await getExitData(finalUtxo[0], childChain, pollInterval);
 
     // startExit
+    console.log(`Starting Exit ${utxoPos.toString()}`);
     await rootChain.startStandardExit({
       utxoPos: utxoPos.toString(),
       outputTx: exitData.txbytes,

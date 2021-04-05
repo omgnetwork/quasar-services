@@ -20,9 +20,6 @@ function createMergeTx(utxo) {
   });
 
   return tx;
-//   console.log(tx);
-//   console.log(totalAmount.toString());
-//   console.log("######")
 }
 
 function sign(childChain, tx, privateKeys) {
@@ -48,11 +45,6 @@ async function submit(childChain, tx, privateKey) {
 }
 
 async function merge(utxos, childChain, account) {
-//   console.log(utxos);
-//   console.log(utxos.length);
-
-  // console.log(utxos);
-
   if (utxos.flat().length === 1) {
     return utxos;
   }
@@ -64,8 +56,6 @@ async function merge(utxos, childChain, account) {
   }
 
   const txs = res.map((utxo) => createMergeTx(utxo));
-  //   console.log(res);
-  //   console.log(txs);
 
   const results = await Promise.all(txs.map((tx) => submit(childChain, tx, account.privateKey)));
   const nextUtxos = results.flat();

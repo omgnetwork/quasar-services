@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "integration-test": "mocha --timeout=0 integration-test/test/quasarRepayment.js"
   },
   "author": "",
   "license": "ISC",

@@ -31,6 +31,5 @@ cron.schedule(process.env.SCHEDULE_START_EXIT, () => {
 });
 
 cron.schedule(process.env.SCHEDULE_PROCESS_EXIT, () => {
-  console.log('Processing');
   repay(rootChain, web3, quasar, account, process.env.TOKEN);
 });

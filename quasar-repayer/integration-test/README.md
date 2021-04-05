@@ -1,8 +1,5 @@
-# Quasar Repayer
+# Running the Integration tests
 
-Service that recursively merges outputs, starts a standard exit, processes the exit and repays the Quasar pool
-
-# Setup
 - Uses the following environment variables:
 ```
 ETH_NODE=                            <entry point to an ethereum node>
@@ -14,14 +11,20 @@ POLL_INTERVAL=                       <poll interval in ms>
 QUASAR_CONTRACT_ADDRESS=             <address of the quasar contract>
 SCHEDULE_START_EXIT=                 <schedule for recursive merge and start exit>
 SCHEDULE_PROCESS_EXIT=               <schedule to attempt repayments>
+
+TOPUP_MULTIPLIER=           <<topup multiplier>>
+MIN_AMOUNT_ETH_PER_TEST=    <<minimum amount of eth per test>>
+FUND_ACCOUNT=               <account with funds for tests>
+FUND_ACCOUNT_PRIVATEKEY=    <private key of fund account>
+ERC20_CONTRACT_ADDRESS=     <erc20 token contract for faucet>
 ```
 
-- Specify schedule in the following format, for eg-
+Start the repayment service -
 ```
-SCHEDULE_START_EXIT='*/10 * * * * *'
-SCHEDULE_PROCESS_EXIT='*/30 * * * * *'
+npm run start
 ```
 
-# Deployment
-- `$ npm install` install dependencies
-- `$ npm run start` to serve client build and server at the same time
+Run tests using -
+```
+npm run integration-test
+```

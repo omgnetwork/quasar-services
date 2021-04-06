@@ -13,7 +13,7 @@
   "dependencies": {
     "@omisego/omg-js": "^4.1.2-1.0.4",
     "@omisego/omg-js-util": "^4.1.2-1.0.4",
-    "@omisego/omg-quasar-js": "^1.0.0",
+    "@omisego/omg-quasar-js": "^1.0.1",
     "axios": "^0.21.1",
     "bn.js": "^5.2.0",
     "dotenv": "^8.2.0",
